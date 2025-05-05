@@ -20,7 +20,7 @@ import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { classes } from "@utils/misc";
 import { useState } from "@webpack/common";
 
-import { cl } from ".";
+import { cl, getToggled, setToggled } from ".";
 
 export function Icon({ height = 20, width = 20, className }: { height?: number; width?: number; className?: string; }) {
     return (
@@ -42,10 +42,12 @@ export function Icon({ height = 20, width = 20, className }: { height?: number; 
 export const ToggleChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
     if (!isMainChat) return null;
 
-    const [toggled, setToggled] = useState(false);
+    const [toggled, setToggledState] = useState(getToggled());
 
     const toggle = () => {
-        setToggled(prev => !prev);
+        const newState = !toggled;
+        setToggled(newState);// обновляем глобально
+        setToggledState(newState);// обновляем локально (чтобы вызвать ре-рендер)
     };
 
     return (

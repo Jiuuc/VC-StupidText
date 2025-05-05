@@ -16,6 +16,10 @@ export function setToggled(value: boolean) {
     toggled = value;
 }
 
+export function getToggled() {
+    return toggled;
+}
+
 export default definePlugin({
     name: "Stupid text",
     description: "The stupidest text",
