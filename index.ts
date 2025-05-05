@@ -4,14 +4,26 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { classNameFactory } from "@api/Styles";
 import definePlugin from "@utils/types";
+
+import { ToggleChatBarIcon } from "./icon";
+
+export const cl = classNameFactory("vc-trans-");
+export var toggled: boolean = false;
+
+export function setToggled(value: boolean) {
+    toggled = value;
+}
 
 export default definePlugin({
     name: "Stupid text",
     description: "The stupidest text",
     authors: [{ name: "Jiuuc", id: 1234567890n }],
+    renderChatBarButton: ToggleChatBarIcon,
     async onBeforeMessageSend(_, message) {
         if (!message.content) return;
+        if (!toggled) return;
         const words = message.content.split(" ");
 
         const convertedWords = words.map(word => {
