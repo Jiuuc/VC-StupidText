@@ -46,8 +46,8 @@ export const ToggleChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     const toggle = () => {
         const newState = !toggled;
-        setToggled(newState);// обновляем глобально
-        setToggledState(newState);// обновляем локально (чтобы вызвать ре-рендер)
+        setToggled(newState);
+        setToggledState(newState);
     };
 
     return (
